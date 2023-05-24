@@ -1,0 +1,7 @@
+sudo apt install gdebi-core
+sudo gdebi -n <tableu-filename-here>
+paste single node command given
+goto localhost 8850 and setup
+after all open new terminal
+and type 
+tabcmd initialuser --server 'localhost:80' --username 'admin'

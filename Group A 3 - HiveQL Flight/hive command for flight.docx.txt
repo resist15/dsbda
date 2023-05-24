@@ -1,0 +1,80 @@
+﻿Write HiveQL for Flight Reservation
+
+
+
+
+1. Creating, Dropping, and altering tables. 
+1. Insert values in tables/ Load the data from flight dataset 
+1. Display data from table
+1. Create index. 
+1. Join 
+
+
+
+
+1. CREATE TABLE flights (
+  flight_id INT,
+  airline STRING,
+  origin STRING,
+  destination STRING,
+  departure_time TIMESTAMP,
+  arrival_time TIMESTAMP,
+  duration INT,
+  price DECIMAL(10, 2),
+  seats_available INT
+);
+
+
+CREATE TABLE reservations (
+  reservation_id INT,
+  flight_id INT,
+  passenger_name STRING,
+  seat_number STRING
+);
+
+
+
+
+2. DROP TABLE flights;
+DROP TABLE reservations;
+
+
+3. -- Add a new column to the flights table
+ALTER TABLE flights ADD COLUMN delay INT;
+
+
+-- Modify the data type of a column in the reservations table
+ALTER TABLE reservations CHANGE COLUMN seat_number seat_number INT;
+
+
+
+
+4. INSERT INTO flights VALUES
+  (1, 'Airline A', 'Origin A', 'Destination A', '2023-05-24 10:00:00', '2023-05-24 12:00:00', 120, 200.00, 50),
+  (2, 'Airline B', 'Origin B', 'Destination B', '2023-05-25 15:30:00', '2023-05-25 18:30:00', 180, 150.00, 100);
+
+
+INSERT INTO reservations VALUES
+  (1, 1, 'John Doe', 'A1'),
+  (2, 2, 'Jane Smith', 'B5');
+
+
+
+
+5. LOAD DATA INPATH '/path/to/flight_dataset.csv' INTO TABLE flights;
+
+
+6. -- Retrieve all flights
+SELECT * FROM flights;
+
+
+-- Retrieve flights with a specific origin and destination
+SELECT * FROM flights WHERE origin = 'Origin A' AND destination = 'Destination A';
+
+
+-- Retrieve reservations for a specific flight
+SELECT * FROM reservations WHERE flight_id = 1;
+
+
+7. -- Create an index on the flights table for faster searching
+CREATE INDEX idx_flight_origin ON flights (origin);
